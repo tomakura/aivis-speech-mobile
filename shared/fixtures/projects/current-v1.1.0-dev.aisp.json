@@ -1,0 +1,80 @@
+{
+  "appVersion": "1.1.0-dev",
+  "talk": {
+    "audioKeys": [
+      "audio-1"
+    ],
+    "audioItems": {
+      "audio-1": {
+        "text": "こんにちは、Aivisです。",
+        "voice": {
+          "engineId": "1b4a5014-d9fd-11ee-b97d-83c170a68ed3",
+          "speakerId": "2d8f6f95-3369-4af7-b0bd-a6310c5d5230",
+          "styleId": 888753760
+        },
+        "query": {
+          "accentPhrases": [
+            {
+              "moras": [
+                {
+                  "text": "コ",
+                  "consonant": "k",
+                  "consonantLength": 0.08,
+                  "vowel": "o",
+                  "vowelLength": 0.12,
+                  "pitch": 5.4
+                },
+                {
+                  "text": "ン",
+                  "vowel": "N",
+                  "vowelLength": 0.09,
+                  "pitch": 5.1
+                },
+                {
+                  "text": "ニ",
+                  "consonant": "n",
+                  "consonantLength": 0.06,
+                  "vowel": "i",
+                  "vowelLength": 0.11,
+                  "pitch": 5.3
+                }
+              ],
+              "accent": 2
+            }
+          ],
+          "speedScale": 1.0,
+          "intonationScale": 1.0,
+          "tempoDynamicsScale": 1.0,
+          "pitchScale": 0.0,
+          "volumeScale": 1.0,
+          "pauseLengthScale": 1.0,
+          "prePhonemeLength": 0.1,
+          "postPhonemeLength": 0.1,
+          "outputSamplingRate": 44100,
+          "outputStereo": false,
+          "kana": "こんにちは、Aivisです。"
+        },
+        "presetKey": "default-normal"
+      }
+    }
+  },
+  "song": {
+    "tpqn": 480,
+    "tempos": [
+      {
+        "position": 0,
+        "bpm": 120.0
+      }
+    ],
+    "timeSignatures": [
+      {
+        "measureNumber": 1,
+        "beats": 4,
+        "beatType": 4
+      }
+    ],
+    "tracks": {},
+    "trackOrder": []
+  }
+}
+

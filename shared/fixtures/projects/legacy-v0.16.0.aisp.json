@@ -1,0 +1,31 @@
+{
+  "appVersion": "0.16.0",
+  "audioKeys": [
+    "audio-legacy-1"
+  ],
+  "audioItems": {
+    "audio-legacy-1": {
+      "text": "旧形式のプロジェクトです。",
+      "voice": {
+        "engineId": "1b4a5014-d9fd-11ee-b97d-83c170a68ed3",
+        "speakerId": "2d8f6f95-3369-4af7-b0bd-a6310c5d5230",
+        "styleId": 888753760
+      },
+      "query": {
+        "accentPhrases": [],
+        "speedScale": 1.0,
+        "intonationScale": 1.0,
+        "tempoDynamicsScale": 1.0,
+        "pitchScale": 0.0,
+        "volumeScale": 1.0,
+        "pauseLengthScale": 1.0,
+        "prePhonemeLength": 0.1,
+        "postPhonemeLength": 0.1,
+        "outputSamplingRate": 44100,
+        "outputStereo": false,
+        "kana": "旧形式のプロジェクトです。"
+      }
+    }
+  }
+}
+

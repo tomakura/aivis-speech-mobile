@@ -1,0 +1,26 @@
+{
+  "manifest": {
+    "uuid": "4c9ca6f3-7d9f-4093-a8dd-f87f0d7c2724",
+    "name": "Sample Voice Model",
+    "version": "1.0.0",
+    "modelArchitecture": "Style-Bert-VITS2",
+    "modelFormat": "AIVMX",
+    "speakers": [
+      {
+        "uuid": "2d8f6f95-3369-4af7-b0bd-a6310c5d5230",
+        "name": "Sample Speaker",
+        "styles": [
+          {
+            "localId": 0,
+            "name": "Normal"
+          }
+        ]
+      }
+    ]
+  },
+  "loadState": {
+    "installed": true,
+    "loaded": false
+  }
+}
+
