@@ -12,7 +12,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -68,14 +68,14 @@ class RemoteAivisSpeechEngine(
     }
 
     private fun get(endpoint: String): ByteArray {
-        val url = HttpUrl.parse("$baseUrl/$endpoint")
+        val url = "$baseUrl/$endpoint".toHttpUrlOrNull()
             ?: throw RemoteEngineException.invalidEndpoint(endpoint)
         val request = Request.Builder().url(url).get().build()
         return execute(request, endpoint)
     }
 
     private fun post(endpoint: String, speaker: Int, text: String?, body: String?): ByteArray {
-        val urlBuilder = HttpUrl.parse("$baseUrl/$endpoint")
+        val urlBuilder = "$baseUrl/$endpoint".toHttpUrlOrNull()
             ?.newBuilder()
             ?.addQueryParameter("speaker", speaker.toString())
             ?: throw RemoteEngineException.invalidEndpoint(endpoint)

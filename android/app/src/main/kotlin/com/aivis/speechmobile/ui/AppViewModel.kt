@@ -96,6 +96,7 @@ class TalkEditorViewModel : ViewModel() {
         _selectedAudioKey.value = _project.value.talk.audioKeys.firstOrNull()
     }
 
+    val selectedAudioKeyFlow: StateFlow<String?> = _selectedAudioKey.asStateFlow()
     val selectedAudioKey: String? get() = _selectedAudioKey.value
 
     val audioRows: List<TalkAudioRow>
@@ -109,7 +110,7 @@ class TalkEditorViewModel : ViewModel() {
 
     val selectedQuery: AudioQuery? get() = selectedAudioItem?.query
     val currentText: String get() = selectedAudioItem?.text ?: ""
-    val currentStyleID: Int? get() = selectedAudioItem?.voice.styleID
+    val currentStyleID: Int? get() = selectedAudioItem?.voice?.styleID
     val currentPresetKey: String get() = presetLabel(selectedAudioItem?.presetKey)
     val kanaPreview: String get() = selectedQuery?.kana ?: currentText
     val accentEditorItems: List<AccentPhraseEditorItem>
