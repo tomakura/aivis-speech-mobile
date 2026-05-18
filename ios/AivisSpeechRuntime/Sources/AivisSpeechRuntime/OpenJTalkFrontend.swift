@@ -280,10 +280,11 @@ enum OpenJTalkFrontend {
             guard !currentMoras.isEmpty else {
                 return
             }
+            // accent=0 is valid for heiban (flat); do not clamp to min 1.
             phrases.append(
                 AccentPhrase(
                     moras: currentMoras,
-                    accent: max(1, min(currentAccent, currentMoras.count)),
+                    accent: min(max(0, currentAccent), currentMoras.count),
                     pauseMora: pauseMora
                 )
             )
@@ -471,7 +472,9 @@ enum OpenJTalkFrontend {
                 if phoneTone[index].phone == phone {
                     consumedTones.append(phoneTone[index].tone)
                     index = phoneTone.index(after: index)
-                } else if isPunctuationPhone(phoneTone[index].phone) {
+                } else {
+                    // Mismatch (including punctuation phones that don't belong to this mora):
+                    // always advance to prevent permanent desync between mora list and label stream.
                     index = phoneTone.index(after: index)
                 }
             }
@@ -494,15 +497,20 @@ enum OpenJTalkFrontend {
 
     private static func accentType(fromMoraTones tones: [Int], fallback: Int) -> Int {
         guard !tones.isEmpty else {
-            return max(1, fallback)
+            // No tone data available — trust OpenJTalk's accent value as-is (0 = heiban is valid).
+            return fallback
         }
-        if tones[0] > 0 {
+        guard let lastHighIndex = tones.lastIndex(where: { $0 > 0 }) else {
+            // All moras low → heiban; preserve fallback which may be 0.
+            return fallback
+        }
+        // Atamadaka (1型): first mora high AND second mora is low (or absent).
+        let secondIsLow = tones.count < 2 || tones[1] == 0
+        if tones[0] > 0, secondIsLow {
             return 1
         }
-        if let lastHighIndex = tones.lastIndex(where: { $0 > 0 }) {
-            return max(1, lastHighIndex + 1)
-        }
-        return max(1, fallback)
+        // Nakadaka / odaka: pitch falls after lastHighIndex mora.
+        return max(1, lastHighIndex + 1)
     }
 
     private static func pauseMora(for node: OpenJTalkFrontendNode) -> Mora? {
