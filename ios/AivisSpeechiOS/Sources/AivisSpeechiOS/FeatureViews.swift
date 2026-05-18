@@ -805,7 +805,7 @@ struct SettingsView: View {
                         .padding(.vertical, 10)
                         .background(AivisUI.secondarySurface, in: RoundedRectangle(cornerRadius: AivisUI.radius, style: .continuous))
                         .opacity(viewModel.remoteEngineEnabled ? 1.0 : 0.45)
-                    Text("既定では端末単体のネイティブ経路だけを使います。この項目は OpenJTalk 統合前の比較確認用で、通常の動作条件には含めません。")
+                    Text("既定では端末単体のネイティブ経路だけを使います。この項目は別端末の AivisSpeech Engine と比較確認する開発用で、通常の動作には不要です。")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
@@ -828,10 +828,10 @@ struct HelpView: View {
                 items: ["読み上げ", "モデル", "辞書", "書き出し"]
             )
 
-            AivisSection("次のマイルストーン") {
-                TimelineRow(title: "日本語フロントエンド", detail: "デスクトップ版の Python 前処理を、モバイルのネイティブ経路へ置き換えます。", systemImage: "textformat")
+            AivisSection("開発状況") {
+                TimelineRow(title: "日本語フロントエンド", detail: "ネイティブ OpenJTalk による読みと区切りの自動解析を実装済みです。", systemImage: "checkmark.circle.fill")
                 AivisDivider()
-                TimelineRow(title: "実音声合成", detail: "プレビュー波形から Style-Bert-VITS2 のテンソル結合と実波形出力へ進めます。", systemImage: "waveform")
+                TimelineRow(title: "実音声合成", detail: "Style-Bert-VITS2 ONNX エンジンによる端末内音声合成を実装済みです。", systemImage: "checkmark.circle.fill")
                 AivisDivider()
                 TimelineRow(title: "プロジェクト互換", detail: ".aisp の往復互換を保ちながら、画面構造だけをモバイル向けに整理します。", systemImage: "doc.text")
             }
