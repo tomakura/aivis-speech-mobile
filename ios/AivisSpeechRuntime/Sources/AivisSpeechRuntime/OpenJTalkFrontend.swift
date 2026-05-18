@@ -44,8 +44,8 @@ enum OpenJTalkFrontend {
         styleID: Int,
         userDictionary: UserDictionary = UserDictionary(entries: [])
     ) throws -> [AccentPhrase] {
-        let nodes = applyingUserDictionary(userDictionary.entries, to: try analyze(text: text))
-        let labels = try makeLabels(text: text)
+        let (rawNodes, labels) = try analyzeAndMakeLabels(text: text)
+        let nodes = applyingUserDictionary(userDictionary.entries, to: rawNodes)
         let phoneTone = try alignTones(
             phonesWithPunctuation: phonesWithPunctuation(from: nodes),
             phoneToneWithoutPunctuation: phoneToneWithoutPunctuation(from: labels)
@@ -58,8 +58,7 @@ enum OpenJTalkFrontend {
     }
 
     static func g2p(text: String) throws -> OpenJTalkG2PResult {
-        let nodes = try analyze(text: text)
-        let labels = try makeLabels(text: text)
+        let (nodes, labels) = try analyzeAndMakeLabels(text: text)
         let phonesWithPunctuation = phonesWithPunctuation(from: nodes)
         let phoneToneWithoutPunctuation = phoneToneWithoutPunctuation(from: labels)
         let phoneTone = try alignTones(
@@ -186,6 +185,76 @@ enum OpenJTalkFrontend {
         }
 
         return labels
+    }
+
+    // Creates a single OpenJTalk handle and runs both frontend (analyze) and
+    // label generation in one pass, avoiding the overhead of two create/destroy cycles.
+    private static func analyzeAndMakeLabels(text: String) throws -> ([OpenJTalkFrontendNode], [String]) {
+        let dictionaryURL = Bundle.module.url(forResource: "OpenJTalkDictionary", withExtension: nil)
+            ?? Bundle.module.url(forResource: "sys", withExtension: "dic")?.deletingLastPathComponent()
+        guard let dictionaryURL else {
+            throw OpenJTalkFrontendError.missingDictionary
+        }
+
+        var errorBuffer = [CChar](repeating: 0, count: 512)
+        let handle = try errorBuffer.withUnsafeMutableBufferPointer { buffer -> OpaquePointer in
+            let pointer = copenjtalk_create(
+                dictionaryURL.path,
+                buffer.baseAddress,
+                CInt(buffer.count)
+            )
+            guard let pointer else {
+                throw OpenJTalkFrontendError.initializationFailed(String(cString: buffer.baseAddress!))
+            }
+            return pointer
+        }
+        defer {
+            copenjtalk_destroy(handle)
+        }
+
+        var nodes: [OpenJTalkFrontendNode] = []
+        let nodeCallback: COpenJTalkNodeCallback = { nodePointer, context in
+            guard let nodePointer, let context else { return }
+            let node = nodePointer.pointee
+            let target = context.assumingMemoryBound(to: [OpenJTalkFrontendNode].self)
+            target.pointee.append(
+                OpenJTalkFrontendNode(
+                    surface: node.surface.map(String.init(cString:)) ?? "",
+                    pronunciation: node.pronunciation.map(String.init(cString:)) ?? "",
+                    partOfSpeech: node.part_of_speech.map(String.init(cString:)) ?? "",
+                    accent: Int(node.accent),
+                    moraSize: Int(node.mora_size),
+                    chainFlag: Int(node.chain_flag)
+                )
+            )
+        }
+        let frontendSucceeded = errorBuffer.withUnsafeMutableBufferPointer { buffer -> Bool in
+            withUnsafeMutablePointer(to: &nodes) { ctx in
+                copenjtalk_run_frontend(handle, text, nodeCallback, UnsafeMutableRawPointer(ctx),
+                                        buffer.baseAddress, CInt(buffer.count)) == 1
+            }
+        }
+        guard frontendSucceeded else {
+            throw OpenJTalkFrontendError.analysisFailed(errorMessage(from: errorBuffer))
+        }
+
+        var labels: [String] = []
+        let labelCallback: COpenJTalkLabelCallback = { labelPointer, context in
+            guard let labelPointer, let context else { return }
+            let target = context.assumingMemoryBound(to: [String].self)
+            target.pointee.append(String(cString: labelPointer))
+        }
+        let labelsSucceeded = errorBuffer.withUnsafeMutableBufferPointer { buffer -> Bool in
+            withUnsafeMutablePointer(to: &labels) { ctx in
+                copenjtalk_make_labels(handle, text, labelCallback, UnsafeMutableRawPointer(ctx),
+                                       buffer.baseAddress, CInt(buffer.count)) == 1
+            }
+        }
+        guard labelsSucceeded else {
+            throw OpenJTalkFrontendError.analysisFailed(errorMessage(from: errorBuffer))
+        }
+
+        return (nodes, labels)
     }
 
     private static func errorMessage(from buffer: [CChar]) -> String {
@@ -693,6 +762,22 @@ enum OpenJTalkFrontend {
         ["a", "e", "i", "o", "u", "A", "E", "I", "O", "U", "N", "cl"].contains(phone)
     }
 
+    // Pre-compiled regexes for HTS label feature extraction.
+    // Compiling these on every call was the dominant per-synthesis CPU cost (~500 compilations).
+    private static let compiledRegexes: [String: NSRegularExpression] = {
+        let patterns = [
+            #"\-(.*?)\+"#,
+            #"!(\d+)_"#,
+            #"/A:([0-9\-]+)\+"#,
+            #"\+(\d+)\+"#,
+            #"\+(\d+)/"#,
+            #"/F:(\d+)_"#,
+        ]
+        return Dictionary(uniqueKeysWithValues: patterns.compactMap { pattern in
+            (try? NSRegularExpression(pattern: pattern)).map { (pattern, $0) }
+        })
+    }()
+
     private static func numericFeature(in text: String, pattern: String) -> Int {
         guard let value = numericString(in: text, pattern: pattern) else {
             return -50
@@ -701,7 +786,8 @@ enum OpenJTalkFrontend {
     }
 
     private static func numericString(in text: String, pattern: String) -> String? {
-        guard let regex = try? NSRegularExpression(pattern: pattern),
+        let regex = compiledRegexes[pattern] ?? (try? NSRegularExpression(pattern: pattern))
+        guard let regex,
               let match = regex.firstMatch(in: text, range: NSRange(text.startIndex..., in: text)),
               match.numberOfRanges > 1,
               let range = Range(match.range(at: 1), in: text) else {
