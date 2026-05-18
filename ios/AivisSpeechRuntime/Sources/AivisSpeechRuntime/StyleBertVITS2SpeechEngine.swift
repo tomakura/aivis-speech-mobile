@@ -222,19 +222,13 @@ public struct StyleBertVITS2SpeechEngine: SpeechEngine {
             )
         }
 
-        _ = try ONNXRuntimeSupport.cachedSessionHandle(
-            for: localFileURL,
-            preferCoreML: false,
-            staticInputShapesOnly: true,
-            shapeProfile: acousticShapeProfile
-        )
         let outputs: [String: ONNXTensorValue]
         do {
             outputs = try ONNXModelRunner.run(
                 modelURL: localFileURL,
                 inputs: inputs,
                 outputNames: [outputName],
-                preferCoreML: false,
+                preferCoreML: true,
                 staticInputShapesOnly: true,
                 shapeProfile: acousticShapeProfile
             )
