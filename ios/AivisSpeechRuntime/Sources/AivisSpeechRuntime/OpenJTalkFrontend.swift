@@ -312,6 +312,9 @@ enum OpenJTalkFrontend {
                 startingOffset: currentMoras.count
             )
             guard !moras.isEmpty else {
+                // No moras (e.g. brackets, hyphens with empty OpenJTalk pronunciation).
+                // Consume any residual pause phone so phoneToneIndex stays aligned.
+                consumePunctuationTone(node, from: phoneTone, index: &phoneToneIndex)
                 continue
             }
 
@@ -737,25 +740,26 @@ enum OpenJTalkFrontend {
         }
     }
 
-    private static func punctuationPhone(from text: String) -> String? {
+    // Maps surface characters to the phoneme string they produce in OpenJTalk HTS labels.
+    // Only「、」「。」(and their ASCII equivalents) actually generate a "pau" phoneme in the
+    // label stream. All other punctuation (brackets, parens, hyphens, ！？…) produce NO
+    // phoneme in the labels, so they must NOT be added to phonesWithPunctuation — doing so
+    // inserts phantom entries into phoneTone that are never consumed and cause tone desync.
+    private static func pausePhone(from text: String) -> String? {
         switch text {
         case "、", ",":
             return ","
         case "。", ".":
             return "."
-        case "！", "!":
-            return "!"
-        case "？", "?":
-            return "?"
-        case "…":
-            return "…"
-        case "'", "「", "」", "（", "）", "(", ")":
-            return "'"
-        case "-", "―", "‐", "−":
-            return "-"
         default:
             return nil
         }
+    }
+
+    // Legacy alias kept for isPunctuationPhone / phones(for:) call sites; returns nil for
+    // non-pause punctuation so it is excluded from the phone alignment arrays.
+    private static func punctuationPhone(from text: String) -> String? {
+        pausePhone(from: text)
     }
 
     private static func normalizedSurface(_ raw: String) -> String {
