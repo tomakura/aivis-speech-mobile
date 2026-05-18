@@ -129,7 +129,7 @@ final class AppViewModel: NSObject, ObservableObject {
             runtimeStatus: runtimeStatus
         )
         let helpViewModel = HelpViewModel(
-            summary: "読み上げを中心にしたモバイルシェルです。iOS と将来の Android 互換に向けてランタイム層を分離し、ネイティブ Style-Bert-VITS2 の入口を接続しています。"
+            summary: "読み上げを中心にしたモバイルシェルです。iOS/Android 共通のランタイム層を分離し、ネイティブ OpenJTalk フロントエンドと Style-Bert-VITS2 エンジンを実装しています。"
         )
 
         if let firstPresetKey = presetCatalog.keys.first,
@@ -687,7 +687,7 @@ private extension EngineRuntimeStatus {
     static let preview = EngineRuntimeStatus(
         providerName: "ONNX Runtime Mobile",
         availability: .unavailable,
-        preferredExecutionProvider: "CoreML planned",
+        preferredExecutionProvider: "CoreML / CPU",
         linkedVersion: nil,
         coreMLAvailable: true,
         notes: ["ランタイム注入なしのプレビューブートストラップです"]
