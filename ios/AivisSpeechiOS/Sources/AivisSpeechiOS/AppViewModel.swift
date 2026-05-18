@@ -13,26 +13,6 @@ private enum AppViewModelError: LocalizedError {
     }
 }
 
-enum AppUserDictionaryStorage {
-    static let userDefaultsKey = "AivisSharedUserDictionary"
-
-    static func load() -> UserDictionary? {
-        guard let data = UserDefaults.standard.data(forKey: userDefaultsKey) else {
-            return nil
-        }
-        return try? JSONDecoder().decode(UserDictionary.self, from: data)
-    }
-
-    static func save(_ dictionary: UserDictionary) throws {
-        let data = try JSONEncoder().encode(dictionary)
-        UserDefaults.standard.set(data, forKey: userDefaultsKey)
-    }
-
-    static func clear() {
-        UserDefaults.standard.removeObject(forKey: userDefaultsKey)
-    }
-}
-
 @MainActor
 final class AppViewModel: NSObject, ObservableObject {
     private static let playbackTimeFormatter: DateComponentsFormatter = {
@@ -140,7 +120,7 @@ final class AppViewModel: NSObject, ObservableObject {
             defaultStyles: defaultStyles
         )
         let dictionaryManager = DictionaryManagerViewModel(
-            dictionary: AppUserDictionaryStorage.load()
+            dictionary: SharedUserDictionaryStorage.load()
                 ?? (try? FixtureBootstrap.loadDictionary())
                 ?? UserDictionary(entries: [])
         )
@@ -1605,7 +1585,7 @@ final class DictionaryManagerViewModel: ObservableObject {
 
     init(
         dictionary: UserDictionary,
-        persist: @escaping (UserDictionary) throws -> Void = { try AppUserDictionaryStorage.save($0) }
+        persist: @escaping (UserDictionary) throws -> Void = { try SharedUserDictionaryStorage.save($0) }
     ) {
         self.dictionary = dictionary
         self.persist = persist

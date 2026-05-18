@@ -7,15 +7,15 @@ struct SmokeTests {
     @Test
     @MainActor
     func bootstrapContainsSixTabsAndEmptyTalkLine() {
-        let previousStoredValue = UserDefaults.standard.object(forKey: AppUserDictionaryStorage.userDefaultsKey)
+        let previousStoredValue = UserDefaults.standard.object(forKey: SharedUserDictionaryStorage.userDefaultsKey)
         defer {
             if let previousStoredValue {
-                UserDefaults.standard.set(previousStoredValue, forKey: AppUserDictionaryStorage.userDefaultsKey)
+                UserDefaults.standard.set(previousStoredValue, forKey: SharedUserDictionaryStorage.userDefaultsKey)
             } else {
-                UserDefaults.standard.removeObject(forKey: AppUserDictionaryStorage.userDefaultsKey)
+                UserDefaults.standard.removeObject(forKey: SharedUserDictionaryStorage.userDefaultsKey)
             }
         }
-        AppUserDictionaryStorage.clear()
+        SharedUserDictionaryStorage.clear()
 
         let viewModel = AppViewModel.bootstrap()
 
