@@ -5,17 +5,34 @@ enum JapaneseKanaFrontend {
     private static let punctuation = Set(["、", "。", "！", "？", ",", ".", "!", "?"])
     private static let pausePunctuation = Set(["、", "。", ",", "."])
     private static let comboTable: [String: (String?, String)] = [
+        // Standard digraph moras
         "キャ": ("ky", "a"), "キュ": ("ky", "u"), "キョ": ("ky", "o"),
-        "シャ": ("sh", "a"), "シュ": ("sh", "u"), "ショ": ("sh", "o"),
-        "チャ": ("ch", "a"), "チュ": ("ch", "u"), "チョ": ("ch", "o"),
+        "シャ": ("sh", "a"), "シュ": ("sh", "u"), "ショ": ("sh", "o"), "シェ": ("sh", "e"),
+        "チャ": ("ch", "a"), "チュ": ("ch", "u"), "チョ": ("ch", "o"), "チェ": ("ch", "e"),
         "ニャ": ("ny", "a"), "ニュ": ("ny", "u"), "ニョ": ("ny", "o"),
         "ヒャ": ("hy", "a"), "ヒュ": ("hy", "u"), "ヒョ": ("hy", "o"),
         "ミャ": ("my", "a"), "ミュ": ("my", "u"), "ミョ": ("my", "o"),
         "リャ": ("ry", "a"), "リュ": ("ry", "u"), "リョ": ("ry", "o"),
         "ギャ": ("gy", "a"), "ギュ": ("gy", "u"), "ギョ": ("gy", "o"),
-        "ジャ": ("j", "a"), "ジュ": ("j", "u"), "ジョ": ("j", "o"),
+        "ジャ": ("j", "a"),  "ジュ": ("j", "u"),  "ジョ": ("j", "o"),  "ジェ": ("j", "e"),
         "ビャ": ("by", "a"), "ビュ": ("by", "u"), "ビョ": ("by", "o"),
         "ピャ": ("py", "a"), "ピュ": ("py", "u"), "ピョ": ("py", "o"),
+        // Loanword extended moras (フ行)
+        "ファ": ("f", "a"),  "フィ": ("f", "i"),  "フェ": ("f", "e"),  "フォ": ("f", "o"),
+        // ヴ行 (v phoneme is in SBVITS2 phoneme set)
+        "ヴァ": ("v", "a"),  "ヴィ": ("v", "i"),  "ヴェ": ("v", "e"),  "ヴォ": ("v", "o"),
+        // ティ / ディ
+        "ティ": ("t", "i"),  "ディ": ("d", "i"),
+        // テュ / デュ
+        "テュ": ("ty", "u"), "デュ": ("dy", "u"),
+        // トゥ / ドゥ
+        "トゥ": ("t", "u"),  "ドゥ": ("d", "u"),
+        // ウィ / ウェ / ウォ
+        "ウィ": ("w", "i"),  "ウェ": ("w", "e"),  "ウォ": ("w", "o"),
+        // ツァ行
+        "ツァ": ("ts", "a"), "ツィ": ("ts", "i"), "ツェ": ("ts", "e"), "ツォ": ("ts", "o"),
+        // スィ / ズィ
+        "スィ": ("s", "i"),  "ズィ": ("z", "i"),
     ]
     private static let moraTable: [String: (String?, String)] = [
         "ア": (nil, "a"), "イ": (nil, "i"), "ウ": (nil, "u"), "エ": (nil, "e"), "オ": (nil, "o"),
@@ -35,6 +52,7 @@ enum JapaneseKanaFrontend {
         "パ": ("p", "a"), "ピ": ("p", "i"), "プ": ("p", "u"), "ペ": ("p", "e"), "ポ": ("p", "o"),
         "ァ": (nil, "a"), "ィ": (nil, "i"), "ゥ": (nil, "u"), "ェ": (nil, "e"), "ォ": (nil, "o"),
         "ー": (nil, "-"), "ッ": (nil, "cl"),
+        "ヴ": ("v", "u"),
     ]
 
     static func accentPhrases(from text: String, styleID: Int) -> [AccentPhrase] {
@@ -122,6 +140,17 @@ enum JapaneseKanaFrontend {
 
             if let phoneme = moraTable[character] {
                 moras.append(makeMora(text: character, phoneme: phoneme, styleID: styleID, offset: startingOffset + moras.count))
+            } else {
+                // Unknown character: insert a fallback mora so mora-count stays consistent with
+                // what accentPhrases() produces, preventing index desync in tonesForMoras().
+                moras.append(Mora(
+                    text: character,
+                    consonant: nil,
+                    consonantLength: nil,
+                    vowel: "a",
+                    vowelLength: 0.12,
+                    pitch: 1.0 + Double((abs(styleID) + startingOffset + moras.count) % 5) * 0.06
+                ))
             }
             index = normalized.index(after: index)
         }
