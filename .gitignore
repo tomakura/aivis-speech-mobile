@@ -21,3 +21,5 @@ ios/AivisSpeechRuntime/Sources/AivisSpeechRuntime/Resources/OpenJTalkDictionary/
 ios/AivisSpeechRuntime/Sources/AivisSpeechRuntime/Resources/OpenJTalkDictionary/sys.dic
 ios/AivisSpeechRuntime/Sources/AivisSpeechRuntime/Resources/OpenJTalkDictionary/unk.dic
 ios/AivisSpeechRuntime/Sources/AivisSpeechRuntime/Resources/OpenJTalkDictionary/COPYING
+
+.claude/worktrees/
