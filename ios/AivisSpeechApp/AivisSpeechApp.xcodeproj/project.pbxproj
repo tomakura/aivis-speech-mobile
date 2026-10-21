@@ -1,0 +1,411 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 71;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1B1A3E2472D8C6103C98B275 /* AivisSpeechApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63512B88B7C9153EB33C9B9 /* AivisSpeechApp.swift */; };
+		80FCE0BFF104D5FFFC65AA5B /* AivisSpeechiOS in Frameworks */ = {isa = PBXBuildFile; productRef = 8E5ECCDBC52763CE691851DE /* AivisSpeechiOS */; };
+		86FBB2E65B79773CA7CA10FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D24900E0CCA77D2B40C6F7 /* Assets.xcassets */; };
+		B97A5C950EC5DAD12A9E57FD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBE1CCEE7793AAFF74F1C013 /* Foundation.framework */; };
+		E1EC2ACDAC4395BF2299EDF6 /* AivisSpeechRuntime in Frameworks */ = {isa = PBXBuildFile; productRef = 714795E835C29803925078DC /* AivisSpeechRuntime */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A2D24900E0CCA77D2B40C6F7 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
+		B63512B88B7C9153EB33C9B9 /* AivisSpeechApp.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AivisSpeechApp.swift; path = Sources/AivisSpeechApp/AivisSpeechApp.swift; sourceTree = "<group>"; };
+		C2A17B8E704A7B856D9A85A7 /* AivisSpeechApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AivisSpeechApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CBE1CCEE7793AAFF74F1C013 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		084B489F95FFAFF62B68C49A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B97A5C950EC5DAD12A9E57FD /* Foundation.framework in Frameworks */,
+				80FCE0BFF104D5FFFC65AA5B /* AivisSpeechiOS in Frameworks */,
+				E1EC2ACDAC4395BF2299EDF6 /* AivisSpeechRuntime in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2B949BC6B04EACCF7E8FDE6D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C2A17B8E704A7B856D9A85A7 /* AivisSpeechApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		384A838ED36FD66C6317EB26 /* AivisSpeechApp */ = {
+			isa = PBXGroup;
+			children = (
+				B63512B88B7C9153EB33C9B9 /* AivisSpeechApp.swift */,
+			);
+			name = AivisSpeechApp;
+			sourceTree = "<group>";
+		};
+		3B71B31A66265A75ABEAC225 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A2D24900E0CCA77D2B40C6F7 /* Assets.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		A65A108C3F60B1DC316F2395 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E5278E969D42DB159772A5FC /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B31F4BBB41C0993FEFDB4955 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				384A838ED36FD66C6317EB26 /* AivisSpeechApp */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		E5278E969D42DB159772A5FC /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBE1CCEE7793AAFF74F1C013 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		E8DEDD847E99E2429D0D87CC = {
+			isa = PBXGroup;
+			children = (
+				2B949BC6B04EACCF7E8FDE6D /* Products */,
+				A65A108C3F60B1DC316F2395 /* Frameworks */,
+				B31F4BBB41C0993FEFDB4955 /* Sources */,
+				3B71B31A66265A75ABEAC225 /* Resources */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7F14D2CE600C073E82992CC7 /* AivisSpeechApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F449C1498F4E36EAEDC1F94B /* Build configuration list for PBXNativeTarget "AivisSpeechApp" */;
+			buildPhases = (
+				D6EF306E0E1BE0BCB3D6AABF /* Sources */,
+				084B489F95FFAFF62B68C49A /* Frameworks */,
+				521AE53D35B052C82626B3EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1BA547AB837DB311A41685C3 /* PBXTargetDependency */,
+				187D8E07AC217E5B114CA77D /* PBXTargetDependency */,
+			);
+			name = AivisSpeechApp;
+			packageProductDependencies = (
+				8E5ECCDBC52763CE691851DE /* AivisSpeechiOS */,
+				714795E835C29803925078DC /* AivisSpeechRuntime */,
+			);
+			productName = AivisSpeechApp;
+			productReference = C2A17B8E704A7B856D9A85A7 /* AivisSpeechApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3FAFB0602D6B9E309A141772 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 2630;
+			};
+			buildConfigurationList = AA78246721F84C5874C49CC4 /* Build configuration list for PBXProject "AivisSpeechApp" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E8DEDD847E99E2429D0D87CC;
+			packageReferences = (
+				56850231CEACE6A1876046B2 /* XCLocalSwiftPackageReference "../AivisSpeechiOS" */,
+				4034CFD29DC497F1F236A57E /* XCLocalSwiftPackageReference "../AivisSpeechRuntime" */,
+			);
+			productRefGroup = 2B949BC6B04EACCF7E8FDE6D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7F14D2CE600C073E82992CC7 /* AivisSpeechApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		521AE53D35B052C82626B3EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				86FBB2E65B79773CA7CA10FA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D6EF306E0E1BE0BCB3D6AABF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1B1A3E2472D8C6103C98B275 /* AivisSpeechApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		187D8E07AC217E5B114CA77D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 714795E835C29803925078DC /* AivisSpeechRuntime */;
+		};
+		1BA547AB837DB311A41685C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 8E5ECCDBC52763CE691851DE /* AivisSpeechiOS */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1B2AF327364EC1BB32391D78 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 369PPD3AAD;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aivis.speechmobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		4A998AA5F2C9AEC6076A35AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 369PPD3AAD;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aivis.speechmobile;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BF67415CCBA501E1334124D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		EF15F75791F507E308B376D1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA78246721F84C5874C49CC4 /* Build configuration list for PBXProject "AivisSpeechApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF15F75791F507E308B376D1 /* Debug */,
+				BF67415CCBA501E1334124D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F449C1498F4E36EAEDC1F94B /* Build configuration list for PBXNativeTarget "AivisSpeechApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A998AA5F2C9AEC6076A35AD /* Release */,
+				1B2AF327364EC1BB32391D78 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		4034CFD29DC497F1F236A57E /* XCLocalSwiftPackageReference "../AivisSpeechRuntime" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../AivisSpeechRuntime;
+		};
+		56850231CEACE6A1876046B2 /* XCLocalSwiftPackageReference "../AivisSpeechiOS" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../AivisSpeechiOS;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		714795E835C29803925078DC /* AivisSpeechRuntime */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4034CFD29DC497F1F236A57E /* XCLocalSwiftPackageReference "../AivisSpeechRuntime" */;
+			productName = AivisSpeechRuntime;
+		};
+		8E5ECCDBC52763CE691851DE /* AivisSpeechiOS */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 56850231CEACE6A1876046B2 /* XCLocalSwiftPackageReference "../AivisSpeechiOS" */;
+			productName = AivisSpeechiOS;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 3FAFB0602D6B9E309A141772 /* Project object */;
+}
