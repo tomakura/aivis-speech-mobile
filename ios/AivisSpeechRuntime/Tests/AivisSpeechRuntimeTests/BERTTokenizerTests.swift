@@ -3,10 +3,17 @@ import Testing
 @testable import AivisSpeechRuntime
 
 struct BERTTokenizerTests {
+    private static let tokenizerURL = URL(fileURLWithPath: #filePath)
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .appendingPathComponent("vendor/Style-Bert-VITS2/bert/deberta-v2-large-japanese-char-wwm-onnx/tokenizer.json")
+
     @Test
     func tokenizerBuildsExpectedIDsForJapaneseCharacters() throws {
-        let tokenizerURL = URL(fileURLWithPath: "/Users/flow/Programs/aivis-speech-mobile/vendor/Style-Bert-VITS2/bert/deberta-v2-large-japanese-char-wwm-onnx/tokenizer.json")
-        let tokenizer = try BERTTokenizerJSON(contentsOf: tokenizerURL)
+        let tokenizer = try BERTTokenizerJSON(contentsOf: Self.tokenizerURL)
 
         let sequence = tokenizer.encode("こんにちは")
 
@@ -17,8 +24,7 @@ struct BERTTokenizerTests {
 
     @Test
     func tokenizerMapsUnknownCharactersToUNK() throws {
-        let tokenizerURL = URL(fileURLWithPath: "/Users/flow/Programs/aivis-speech-mobile/vendor/Style-Bert-VITS2/bert/deberta-v2-large-japanese-char-wwm-onnx/tokenizer.json")
-        let tokenizer = try BERTTokenizerJSON(contentsOf: tokenizerURL)
+        let tokenizer = try BERTTokenizerJSON(contentsOf: Self.tokenizerURL)
 
         let sequence = tokenizer.encode("🧌")
 

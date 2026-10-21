@@ -6,8 +6,12 @@ import AivisMobileCore
 struct StyleBertVITS2IntegrationTests {
     @Test
     func synthesizesWaveDataWithLocalAIVMXAndDesktopBertCache() async throws {
-        let modelURL = URL(fileURLWithPath: "/Users/flow/Library/Application Support/AivisSpeech-Engine/Models/51cf5e96-f94f-4d50-a8d1-dbe540525161.aivmx")
-        let bertCacheURL = URL(fileURLWithPath: "/Users/flow/Library/Application Support/AivisSpeech-Engine/BertModelCaches")
+        let engineSupportURL = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Library/Application Support/AivisSpeech-Engine")
+        let modelURL = engineSupportURL
+            .appendingPathComponent("Models/51cf5e96-f94f-4d50-a8d1-dbe540525161.aivmx")
+        let bertCacheURL = engineSupportURL
+            .appendingPathComponent("BertModelCaches")
         guard FileManager.default.fileExists(atPath: modelURL.path),
               FileManager.default.fileExists(atPath: bertCacheURL.path) else {
             return
